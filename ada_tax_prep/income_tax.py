@@ -59,5 +59,16 @@ def calculate_deducted_income(income, deductions, standard_deduction):
 
     return adjusted_income if adjusted_income > 0 else 0
 
+
 def calculate_deducted_income_2020(income, deductions):
     return calculate_deducted_income(income, deductions, STANDARD_DEDUCTION_2020)
+
+
+def calculate_tax_liability(income, deductions, standard_deduction, brackets):
+    deducted_income = calculate_deducted_income(income, deductions, standard_deduction)
+    return calculate_tax_by_bracket(deducted_income, brackets)
+
+
+def calculate_tax_liability_2020(income, deductions):
+    return calculate_tax_liability(income, deductions, STANDARD_DEDUCTION_2020, TAX_BRACKETS_2020)
+
