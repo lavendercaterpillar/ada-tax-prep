@@ -38,8 +38,10 @@ DEDUCTION_CATEGORIES = (
     "mortgage",
     "child",
     "tuition",
-    "healthcare"
+    "healthcare",
+    "home office"
 )
+
 
 STANDARD_DEDUCTION_2020 = 12400
 
@@ -100,3 +102,4 @@ class TaxPayer:
         tax_liability = calculate_tax_by_bracket(deducted_income, TAX_BRACKETS_2020)
 
         return self.withholdings - tax_liability
+
