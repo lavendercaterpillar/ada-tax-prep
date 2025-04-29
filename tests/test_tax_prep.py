@@ -165,3 +165,13 @@ def test_calculate_adjusted_income_tax_burden(all_valid_deductions):
     adjusted_income_tax = calculate_tax_liability_2020(income, all_valid_deductions)
 
     assert adjusted_income_tax == 988 + 1815
+
+
+def test_applies_standard_deduction():
+    income = 50000
+
+    deducted_income = calculate_deducted_income_2020(income, {})
+
+    assert deducted_income == 37600
+
+
