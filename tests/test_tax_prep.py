@@ -1,7 +1,9 @@
 import pytest
 from ada_tax_prep.income_tax import (
-    calculate_tax_2020, calculate_deducted_income_2020, calculate_tax_liability_2020
+    calculate_tax_2020, calculate_deducted_income_2020, calculate_tax_liability_2020,
+    TaxPayer
 )
+
 
 def test_no_income():
     income = 0
@@ -174,4 +176,17 @@ def test_applies_standard_deduction():
 
     assert deducted_income == 37600
 
+def test_taxpayer_receiving_a_return_gets_a_return(all_valid_deductions):
+    taxpayer = TaxPayer(withholdings=3000, income=50000, deductions=all_valid_deductions)
+
+    refund = taxpayer.calculate_return_2020()
+
+    assert refund == 197
+
+def test_taxpayer_owing_tax_has_negative_return(few_valid_deductions):
+    taxpayer = TaxPayer(withholdings=3000, income=50000, deductions=few_valid_deductions)
+
+    refund = taxpayer.calculate_return_2020()
+
+    assert refund == -1003
 
